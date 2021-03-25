@@ -32,25 +32,21 @@ footer {
 
 <body>
 <header>
-<h1> Insert Data (Hibernate)</h1>
+<h1> Search Data (Hibernate) </h1>
 </header>
 
 <nav>
-<a href="/Individual/CustomerSearch.html">Search Customer Data</a> <br>
+<a href="/Individual/AccountInsert.html">Insert Data</a> <br>
 </nav>
 
 <section>
 	<h1>User Input</h1>
 	
-	<form action="CustomerInsert" method="POST">
+	<form action="AccountSearchID" method="POST">
 	
-		First Name: <input type="text" name="first_name"> <br />
-		Middle Name: <input type="text" name="middle_name"> <br />
-		Last Name: <input type="text" name="last_name"> <br />
-		Phone: <input type="text" name="phone"> <br />
-		Main Branch: <input type="text" name="main_branch"> <br />
+		Customer ID: <input type="text" name="keyword"> <br />
 		
-		<input type="submit" value="Submit" />
+		<input type="submit" value="Search" />
 	</form>
 
 </section>

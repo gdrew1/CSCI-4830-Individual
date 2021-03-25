@@ -66,7 +66,7 @@ public class UtilDBDrew {
          List<?> employees = session.createQuery("FROM Customer").list();
          for (Iterator<?> iterator = employees.iterator(); iterator.hasNext();) {
             Customer employee = (Customer) iterator.next();
-            if (employee.getFirst_name().startsWith(keyword)) {
+            if (employee.getLast_name().startsWith(keyword)) {
                resultList.add(employee);
             }
          }
@@ -118,7 +118,7 @@ public class UtilDBDrew {
 	         List<?> employees = session.createQuery("FROM Accounts").list();
 	         for (Iterator<?> iterator = employees.iterator(); iterator.hasNext();) {
 	            Accounts employee = (Accounts) iterator.next();
-	            if (String.valueOf((employee.getAccount_number())).startsWith(keyword)) {
+	            if (String.valueOf((employee.getAccount_number())).equals(keyword)) {
 	               resultList.add(employee);
 	            }
 	         }
@@ -131,6 +131,143 @@ public class UtilDBDrew {
 	         session.close();
 	      }
 	      return resultList;
+	   }
+	   
+	   public static List<Accounts> listAccountsID(String keyword) {
+		      List<Accounts> resultList = new ArrayList<Accounts>();
+
+		      Session session = getSessionFactory().openSession();
+		      Transaction tx = null;
+
+		      try {
+		         tx = session.beginTransaction();
+		         System.out.println((Accounts)session.get(Accounts.class, 1)); // use "get" to fetch data
+		        // Query q = session.createQuery("FROM Employee");
+		         List<?> employees = session.createQuery("FROM Accounts").list();
+		         for (Iterator<?> iterator = employees.iterator(); iterator.hasNext();) {
+		            Accounts employee = (Accounts) iterator.next();
+		            if (String.valueOf((employee.getCustomer_id())).equals(keyword)) {
+		               resultList.add(employee);
+		            }
+		         }
+		         tx.commit();
+		      } catch (HibernateException e) {
+		         if (tx != null)
+		            tx.rollback();
+		         e.printStackTrace();
+		      } finally {
+		         session.close();
+		      }
+		      return resultList;
+		   }
+	   
+	   public static Float DepositAccount(int id, float amount) {
+		   List<Accounts> resultList = new ArrayList<Accounts>();
+
+		      Session session = getSessionFactory().openSession();
+		      Transaction tx = null;
+		      float balance = -2;
+
+		      try {
+		         tx = session.beginTransaction();
+		         System.out.println((Accounts)session.get(Accounts.class, 1)); // use "get" to fetch data
+		        // Query q = session.createQuery("FROM Employee");
+		         
+		         List<Accounts> listAccount = session.createQuery("FROM Accounts WHERE account_number = " + id).list();
+		         if(listAccount.size() > 0) {
+			         Accounts account = listAccount.get(0);
+			         account.deposit(amount);
+			         balance = account.getBalance();
+			         session.createQuery("UPDATE Accounts SET balance = " + balance + " where account_number = " + id);
+		         }
+		         else
+		         {
+		        	 balance = -2;
+		         }
+		         tx.commit();
+		      } catch (HibernateException e) {
+		         if (tx != null)
+		            tx.rollback();
+		         e.printStackTrace();
+		      } finally {
+		         session.close();
+		      }
+		      return balance;
+	   }
+	   
+	   public static Float TransferAccount(int idTo, int idFrom, float amount) {
+		   List<Accounts> resultList = new ArrayList<Accounts>();
+
+		      Session session = getSessionFactory().openSession();
+		      Transaction tx = null;
+		      float balance = -2;
+
+		      try {
+		         tx = session.beginTransaction();
+		         System.out.println((Accounts)session.get(Accounts.class, 1)); // use "get" to fetch data
+		        // Query q = session.createQuery("FROM Employee");
+		         List<Accounts> listAccountTo = session.createQuery("FROM Accounts where account_number = " + idTo).list();
+		         List<Accounts> listAccountFrom = session.createQuery("FROM Accounts where account_number = " + idFrom).list();
+		         if(listAccountTo.size() > 0 && listAccountFrom.size() > 0) {
+			         Accounts accountTo = listAccountTo.get(0);
+			         Accounts accountFrom = listAccountFrom.get(0);
+			         balance = accountFrom.transfer(accountTo, amount);
+			         if(balance >= 0)
+			         {
+			        	 session.createQuery("UPDATE Accounts SET balance = " + balance + " where account_number = " + idFrom);
+			        	 session.createQuery("UPDATE Accounts SET balance = " + accountTo.getBalance() + " where account_number = " + idTo);
+			         }
+			         
+			        	 
+		         }
+		         else
+		         {
+		        	 balance = -2;
+		         }
+		         tx.commit();
+		      } catch (HibernateException e) {
+		         if (tx != null)
+		            tx.rollback();
+		         e.printStackTrace();
+		      } finally {
+		         session.close();
+		      }
+		      return balance;
+	   }
+	   
+	   public static Float WithdrawAccount(int id, float amount) {
+		   List<Accounts> resultList = new ArrayList<Accounts>();
+
+		      Session session = getSessionFactory().openSession();
+		      Transaction tx = null;
+		      float balance = -2;
+
+		      try {
+		         tx = session.beginTransaction();
+		         System.out.println((Accounts)session.get(Accounts.class, 1)); // use "get" to fetch data
+		        // Query q = session.createQuery("FROM Employee");
+		         List<Accounts> listAccount = session.createQuery("FROM Accounts where account_number = " + id).list();
+		         if(listAccount.size() > 0) {
+			         Accounts account = listAccount.get(0);
+			         balance = account.withdraw(amount);
+			         if(balance >= 0)
+			         {
+			        	 session.createQuery("UPDATE Accounts SET balance = " + balance + " where account_number = " + id);
+			         }	 
+		         }
+		         else
+		         {
+		        	 balance = -2;
+		         }
+		         tx.commit();
+		      } catch (HibernateException e) {
+		         if (tx != null)
+		            tx.rollback();
+		         e.printStackTrace();
+		      } finally {
+		         session.close();
+		      }
+		      return balance;
 	   }
 
    public static void createCustomer(String first_name, String middle_name, String last_name, String phone, String branch) {

@@ -16,8 +16,8 @@ import javax.persistence.Table;
   main_branch VARCHAR(30) NOT NULL,    
   PRIMARY KEY (id));
  */
-@Table(name = "accounts")
-@javax.persistence.Entity(name = "account")
+@Table(name = "Accounts")
+@javax.persistence.Entity(name = "Account")
 public class Accounts {
 	
 	@Id  // primary key
@@ -63,6 +63,33 @@ public class Accounts {
    private Float balance;
 
    public Accounts() {
+   }
+   
+   public float withdraw(float amount) {
+	   if(amount <= this.balance) {
+		   this.balance -= amount;
+		   return this.balance;
+	   }
+	   else
+	   {
+		   return -1;
+	   }
+   }
+   
+   public float deposit(float amount) {
+	   this.balance += amount;
+	   return this.balance;
+   }
+   
+   public float transfer(Accounts target, float amount) {
+	   if(this.withdraw(amount) >= 0) {
+		   target.deposit(amount);
+		   return this.balance;
+	   }
+	   else {
+		   return -1;
+	   }
+		   
    }
 
    public Accounts(int customer_id, String account_type, float balance) {

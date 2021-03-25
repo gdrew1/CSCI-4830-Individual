@@ -14,7 +14,7 @@ import javax.persistence.Table;
   last_name VARCHAR(30) NOT NULL,  
   phone_number VARCHAR(30) NOT NULL,
   main_branch VARCHAR(30) NOT NULL,    
-  PRIMARY KEY (id));
+  PRIMARY KEY (customer_id));
  */
 @Table(name = "Customer")
 @javax.persistence.Entity(name = "Customer")
@@ -46,8 +46,9 @@ public class Customer {
 
 @Id  // primary key
    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   @Column(name = "id") // specify the column name. Without it, it will use method name
-   private Integer id;
+@Column(name = "customer_id")
+private int customer_id;
+
 
    @Column(name = "first_name")
    private String first_name;
@@ -77,11 +78,11 @@ public class Customer {
 
 
    public Integer getId() {
-      return id;
+      return this.customer_id;
    }
 
    public void setId(Integer id) {
-      this.id = id;
+      this.customer_id = id;
    }
 
    public String getFirst_name() {
@@ -102,7 +103,7 @@ public void setLast_name(String last_name) {
 
 @Override
 public String toString() {
-	return "Customer [id=" + id + ", first_name=" + first_name + ", middle_name=" + middle_name + ", last_name="
+	return "Customer [customer_id=" + customer_id + ", first_name=" + first_name + ", middle_name=" + middle_name + ", last_name="
 			+ last_name + ", phone_number=" + phone_number + ", main_branch=" + main_branch + "]";
 }
 
