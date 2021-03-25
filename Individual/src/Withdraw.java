@@ -46,7 +46,14 @@ public class Withdraw extends HttpServlet {
         out.println("<ul>");
         out.println("<li> New Balance from transfered account: " + balance);
         out.println("</ul>");
-        out.println("<a href=/" + Info.projectName + "/" + Info.accountSearchWebName + ">Search Data</a> <br>");
+        out.println("<a href=\"/Individual/AccountInsert.html\">Create New Account</a> <br>\r\n" + 
+        		"<a href=\"/Individual/AccountSearch.html\">Search Accounts By Account Number</a> <br>\r\n" + 
+        		"<a href=\"/Individual/AccountSearchByID.html\">Search Accounts By Customer ID</a> <br>\r\n" + 
+        		"<a href=\"/Individual/CustomerInsert.html\">Create New Customer</a> <br>\r\n" + 
+        		"<a href=\"/Individual/CustomerSearch.html\">Search Customers</a> <br>\r\n" + 
+        		"<a href=\"/Individual/Deposit.html\">Deposit to Account</a> <br>\r\n" + 
+        		"<a href=\"/Individual/Transfer.html\">Transfer between Accounts</a> <br>\r\n" + 
+        		"<a href=\"/Individual/Withdraw.html\">Withdraw from Account</a> <br>");
         out.println("</body></html>");
         }
         else if (balance == -2)
@@ -63,7 +70,14 @@ public class Withdraw extends HttpServlet {
             out.println("<ul>");
             out.println("<li> One of the specified accounts doesn't exist");
             out.println("</ul>");
-            out.println("<a href=/" + Info.projectName + "/" + Info.accountSearchWebName + ">Search Data</a> <br>");
+            out.println("<a href=\"/Individual/AccountInsert.html\">Create New Account</a> <br>\r\n" + 
+            		"<a href=\"/Individual/AccountSearch.html\">Search Accounts By Account Number</a> <br>\r\n" + 
+            		"<a href=\"/Individual/AccountSearchByID.html\">Search Accounts By Customer ID</a> <br>\r\n" + 
+            		"<a href=\"/Individual/CustomerInsert.html\">Create New Customer</a> <br>\r\n" + 
+            		"<a href=\"/Individual/CustomerSearch.html\">Search Customers</a> <br>\r\n" + 
+            		"<a href=\"/Individual/Deposit.html\">Deposit to Account</a> <br>\r\n" + 
+            		"<a href=\"/Individual/Transfer.html\">Transfer between Accounts</a> <br>\r\n" + 
+            		"<a href=\"/Individual/Withdraw.html\">Withdraw from Account</a> <br>");
             out.println("</body></html>");
         }
         else
@@ -80,7 +94,14 @@ public class Withdraw extends HttpServlet {
             out.println("<ul>");
             out.println("<li> There is not enough money to complete this withdrawal");
             out.println("</ul>");
-            out.println("<a href=/" + Info.projectName + "/" + Info.accountSearchWebName + ">Search Data</a> <br>");
+            out.println("<a href=\"/Individual/AccountInsert.html\">Create New Account</a> <br>\r\n" + 
+            		"<a href=\"/Individual/AccountSearch.html\">Search Accounts By Account Number</a> <br>\r\n" + 
+            		"<a href=\"/Individual/AccountSearchByID.html\">Search Accounts By Customer ID</a> <br>\r\n" + 
+            		"<a href=\"/Individual/CustomerInsert.html\">Create New Customer</a> <br>\r\n" + 
+            		"<a href=\"/Individual/CustomerSearch.html\">Search Customers</a> <br>\r\n" + 
+            		"<a href=\"/Individual/Deposit.html\">Deposit to Account</a> <br>\r\n" + 
+            		"<a href=\"/Individual/Transfer.html\">Transfer between Accounts</a> <br>\r\n" + 
+            		"<a href=\"/Individual/Withdraw.html\">Withdraw from Account</a> <br>");
             out.println("</body></html>");
         }
 	}

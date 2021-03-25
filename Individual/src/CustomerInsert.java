@@ -40,7 +40,14 @@ public class CustomerInsert extends HttpServlet implements Info {
       out.println("<li> Phone: " + phone);
       out.println("<li> Main Branch: " + main_branch);
       out.println("</ul>");
-      out.println("<a href=/" + projectName + "/" + customerSearchWebName + ">Search Data</a> <br>");
+      out.println("<a href=\"/Individual/AccountInsert.html\">Create New Account</a> <br>\n" + 
+      		"<a href=\"/Individual/AccountSearch.html\">Search Accounts By Account Number</a> <br>\n" + 
+      		"<a href=\"/Individual/AccountSearchByID.html\">Search Accounts By Customer ID</a> <br>\n" + 
+      		"<a href=\"/Individual/CustomerInsert.html\">Create New Customer</a> <br>\n" + 
+      		"<a href=\"/Individual/CustomerSearch.html\">Search Customers</a> <br>\n" + 
+      		"<a href=\"/Individual/Deposit.html\">Deposit to Account</a> <br>\n" + 
+      		"<a href=\"/Individual/Transfer.html\">Transfer between Accounts</a> <br>\n" + 
+      		"<a href=\"/Individual/Withdraw.html\">Withdraw from Account</a> <br>");
       out.println("</body></html>");
    }
 
